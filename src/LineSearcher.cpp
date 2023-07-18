@@ -27,6 +27,7 @@ void LineSearcher::copy(const LineSearcher& rhs)
 void LineSearcher::compute_trend_line_by_RANSAC(const list<Point2>& points, const int& numTrials, const int& numCandidates)
 {
 	double threshold = calculate_initial_threshold_by_vertical_line(points);
+	cout<<"RANSAC process start - initial threshold: "<<threshold<<endl;
 
 	pair<array<const Point2*, 2>, int> bestLine; // First: line, Second: number of inliers
 
@@ -51,12 +52,30 @@ void LineSearcher::compute_trend_line_by_RANSAC(const list<Point2>& points, cons
 			bestLine.first = pickedPoints;
 			bestLine.second = inliers.size();
 
+			cout<<"Best line updated: "<<bestLine.second<<" ("<< 100.0* bestLine.second / points.size()<<"%)"<< endl;
+
 			// Update the threshold.
 			double newThreshold = calculate_standard_deviation_of_residuals_against_line(pickedPoints, inliers);
+			cout<<"New threshold: "<<newThreshold;
 			if (newThreshold < threshold)
 			{
 				threshold = newThreshold;
+
+				inliers.clear();
+				for (auto& point : points)
+				{
+					if (&point != pickedPoints.at(0) && &point != pickedPoints.at(1))
+					{
+						double residual = calculate_residual_against_line(pickedPoints, point);
+						if (residual < threshold)
+							inliers.insert(&point);
+					}
+				}
+				bestLine.second = inliers.size();
+
+				cout<<" - Threshold updated: "<<threshold<<", inliers: "<<inliers.size();
 			}
+			cout << endl;
 		}
 	}
 
@@ -133,6 +152,7 @@ double LineSearcher::calculate_standard_deviation_of_residuals_against_line(cons
 		}
 	}
 	standardDeviation /= inliers.size();
+	standardDeviation = sqrt(standardDeviation);
 
 	return THRESHOLD_MULTIPLIER *standardDeviation;
 }

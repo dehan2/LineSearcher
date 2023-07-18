@@ -1,4 +1,5 @@
 #include "Point2.hpp"
+#include "ConstForLineSearcher.hpp"
 
 #include <cmath>
 
@@ -76,6 +77,16 @@ Point2& Point2::operator/=(const double& rhs)
     m_x /= rhs;
     m_y /= rhs;
     return *this;
+}
+
+
+
+bool Point2::operator==(const Point2& rhs) const
+{
+    if (abs(m_x - rhs.m_x) < COORDINATE_EPSILON && abs(m_y - rhs.m_y) < COORDINATE_EPSILON)
+		return true;
+	else
+        return false;
 }
 
 

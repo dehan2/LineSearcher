@@ -1,5 +1,7 @@
 #pragma once
 
+#include <cmath>
+
 class Point2
 {
 private:
@@ -24,6 +26,8 @@ public:
 	Point2& operator*=(const double& rhs);
 	Point2& operator/=(const double& rhs);
 
+	bool operator==(const Point2& rhs) const;
+
 	friend Point2 operator*(const double& lhs, const Point2& rhs);
 
 	const double& x() const { return m_x; }
@@ -34,7 +38,7 @@ public:
 
 	void copy(const Point2& rhs);
 
-	double norm() const { sqrt(pow(m_x, 2) + pow(m_y, 2)); }
+	double norm() const { return sqrt(pow(m_x, 2) + pow(m_y, 2)); }
 	double distance_to(const Point2& rhs) const;
 	double dot_product(const Point2& rhs) const { return m_x * rhs.m_x + m_y * rhs.m_y; }
 	double cross_product(const Point2& rhs) const { return m_x * rhs.m_y - m_y * rhs.m_x; }
