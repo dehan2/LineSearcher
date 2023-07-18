@@ -104,7 +104,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\opencv\build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\opencv\build\include;include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -135,9 +135,11 @@
   <ItemGroup>
     <ClCompile Include="src\LineSearcher.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Point2.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\LineSearcher.h" />
+    <ClInclude Include="include\LineSearcher.hpp" />
+    <ClInclude Include="include\Point2.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

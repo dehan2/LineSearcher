@@ -21,9 +21,15 @@
     <ClCompile Include="src\LineSearcher.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="src\Point2.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\LineSearcher.h">
+    <ClInclude Include="include\LineSearcher.hpp">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Point2.hpp">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
